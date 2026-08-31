@@ -34,7 +34,7 @@ url_dict = {'items': 'https://api.open5e.com/v2/items/',
 'images': 'https://api.open5e.com/v2/images/',
 'weaponproperties': 'https://api.open5e.com/v2/weaponproperties/',
 'services': 'https://api.open5e.com/v2/services/'}
-
+'''
 def get_url(resource_type):
     for key, value in url_dict.items():
         if key == resource_type:
@@ -49,6 +49,36 @@ def get_data(RESOURCE_TYPE):
     else:
         print(f"Error: {response.status_code}")
         return None
+
+def get_data_by_url(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}")
+        return None
+'''
+class APIRequest:
+    def __init__(self, search_type, search_query):
+        self.search_type = search_type
+        self.search_query = search_query
+
+    def category_url(self, search_query):
+        for key, value in url_dict.items():
+                if key == search_query:
+                     self.url = value
+
+    def fetch_data(self):
+        response = requests.get(self.url)
+        if response.status_code == 200:
+            self.data = response.json()
+        else:
+            print(f"Error: {response.status_code}")
+            return None
+
+    def category_results(self, search_query):
+        url = self.get_url(search_query)
+        self.fetch_data(url)
 
 '''
 API Response Explained:

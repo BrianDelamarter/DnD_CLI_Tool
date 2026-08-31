@@ -1,0 +1,23 @@
+{
+'key': 'srd-2024_adamantine-armor-breastplate',
+'name': 'Adamantine Armor (Breastplate)',
+'desc': "This suit of armor is reinforced with adamantine, one of the hardest substances in existence. While you're wearing it, any Critical Hit against you becomes a normal hit.", 'category': {'name': 'Armor', 'key': 'armor'},
+'rarity': {'name': 'Uncommon', 'key': 'uncommon', 'rank': 2},
+'weapon': None,
+'armor': {'name': 'Breastplate', 'key': 'srd-2024_breastplate',
+'category': 'medium',
+'ac_base': 14,
+'ac_display': '14 + Dex modifier (max 2)',
+'ac_add_dexmod': True, 'ac_cap_dexmod': 2,
+'grants_stealth_disadvantage': False,
+'strength_score_required': None},
+'size': {'name': 'Tiny', 'key': 'tiny'},
+'weight': '20.000',
+'weight_unit': 'lb',
+'cost': '0.00',
+'requires_attunement': False,
+'attunement_detail': None,
+'document': {'name': 'System Reference Document 5.2', 'key': 'srd-2024', 'type': 'SOURCE', 'display_name': '5e 2024 Rules', 'publisher': {'name': 'Wizards of the Coast', 'key': 'wizards-of-the-coast'},
+'gamesystem': {'name': '5th Edition 2024', 'key': '5e-2024'}, 'permalink': 'https://dnd.wizards.com/resources/systems-reference-document'},
+'crossreferences': {'to': []}
+}
