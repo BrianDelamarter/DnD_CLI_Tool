@@ -1,4 +1,5 @@
 from dnd_cli_tool.print_effects import burn, printer, thunderstorm, wipe, figlet_format
+from API import category_search, general_search
 
 def main():
     welcome()
@@ -15,11 +16,19 @@ def welcome():
 def main_menu():
     printer('''
                               Main Menu:
-    1. Search Monsters    2. Search Spells    3. Roll Dice    4. Exit
+    1. Search Creatures    2. Search Spells    3. Roll Dice    4. Exit
     ''')
     choice = input("Please select an option (1-4): ")
     if choice == '1':
-        pass
+        monsters = category_search("creatures")
+        monsters.api_request()
+        printer(f"There are {monsters.data['count']} creatures in the Open5e database. Search for a specific creature by name.")
+        query = input("Creature name: ")
+        result = monsters.search_page(query)
+        if result:
+            print(result["name"])
+        else:
+            printer("Creature not found.")
     elif choice == '2':
         pass
     elif choice == '3':

@@ -18,7 +18,7 @@ class search:
     def previous_page(self):
         self.url = self.data["previous"]
 
-    def update_data(self, page_direction):
+    def page_data(self, page_direction):
         if page_direction == 0:
             self.next_page()
             self.api_request()
@@ -37,9 +37,26 @@ class category_search(search):
         self.url = self.base_url+self.category
         if filter:
             self.url += ("/?type="+filter)
-        self.url += "&?fields=name"
         self.api_request()
 
+    def expected_page(self, query):
+        first_letter_ascii = ord(query[0].lower())
+        if first_letter_ascii-96 == 1:
+            expected_page = 1
+        else:
+            expected_page = int(((first_letter_ascii-96)/26)*(self.data["count"]/50))
+        return expected_page
+
+    def search_page(self, query):
+        expected_page = self.expected_page(query)
+        self.url = self.base_url+self.category+"/?page="+str(expected_page)
+        self.api_request()
+        for result in self.data["results"]:
+            if result["name"].lower() == query.lower():
+                return result
+        print(self.data["results"][0]["name"])
+        print(self.data["results"][-1]["name"])
+        return None
 
 
 class general_search(search):
@@ -49,14 +66,14 @@ class general_search(search):
         self.url = self.base_url + "search/?query=" + self.query
         self.api_request()
 
-
-creatures = category_search("creatures",filter="dragon")
+'''
+creatures = category_search("creatures")
 print(creatures.url)
-print(creatures.data["results"][0])
-creatures.update_data(0)
+print(creatures.data["results"][0]["name"])
+creatures.page_data(0)
 print(creatures.url)
-print(creatures.data["results"][0])
+print(creatures.data["results"][0]["name"])
 
 
-'''goblin_search = general_search("goblin")
+goblin_search = general_search("goblin")
 print(goblin_search.data['previous'])'''
