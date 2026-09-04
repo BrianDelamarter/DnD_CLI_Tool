@@ -5,9 +5,11 @@ from print_effects import printer
 class search:
     def __init__(self):
         self.base_url = "https://api.open5e.com/v2/"
-        self.data = {}
+        self.api_request(self.base_url)
 
-    def api_request(self):
+    def api_request(self, url=None):
+        if url:
+            self.url = url
         response = requests.get(self.url)
         #print("Making API request to:", self.url)
         if response.status_code == 200:
@@ -74,6 +76,9 @@ class category_search(search):
                 return result
 
 
+
+DnD = search()  
+print(DnD.data)
 
 '''
 class general_search(search):
