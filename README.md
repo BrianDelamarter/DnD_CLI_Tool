@@ -17,6 +17,8 @@ and learn new programming skills.
 ## API Details
 
 API: [Open5e](https://open5e.com/)
+Extra Details: [DeepWiki Open5e](https://deepwiki.com/open5e/open5e-api/3-system-architecture)
+Hoppscotch: [Hoppscotch](https://hoppscotch.io/)
 
 The Open5e API provides programmatic access to all resources and rules included on this site. 
 
