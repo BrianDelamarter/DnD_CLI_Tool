@@ -1,3 +1,4 @@
+'''
 import requests
 
 #Dictionary of API endpoints for different resource types
@@ -34,7 +35,7 @@ url_dict = {'items': 'https://api.open5e.com/v2/items/',
 'images': 'https://api.open5e.com/v2/images/',
 'weaponproperties': 'https://api.open5e.com/v2/weaponproperties/',
 'services': 'https://api.open5e.com/v2/services/'}
-'''
+
 def get_url(resource_type):
     for key, value in url_dict.items():
         if key == resource_type:
@@ -57,7 +58,7 @@ def get_data_by_url(url):
     else:
         print(f"Error: {response.status_code}")
         return None
-'''
+
 class APIRequest:
     def __init__(self, search_type, search_query):
         self.search_type = search_type
@@ -80,7 +81,7 @@ class APIRequest:
         url = self.get_url(search_query)
         self.fetch_data(url)
 
-'''
+
 API Response Explained:
 - The API response is a JSON object that contains a dictionary with four keys: 'count', 'next', 'previous', 
 and 'results'.

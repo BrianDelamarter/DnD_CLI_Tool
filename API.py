@@ -5,11 +5,10 @@ from print_effects import printer
 class search:
     def __init__(self):
         self.base_url = "https://api.open5e.com/v2/"
-        self.api_request(self.base_url)
+        self.url = self.base_url
+        self.api_request()
 
-    def api_request(self, url=None):
-        if url:
-            self.url = url
+    def api_request(self):
         response = requests.get(self.url)
         #print("Making API request to:", self.url)
         if response.status_code == 200:
@@ -63,33 +62,14 @@ class category_search(search):
         self.url = self.base_url+self.category+"/?page="+str(expected_page)
         self.api_request()
         while not self.right_page:
-            if self.data["results"][0]["name"][0] <= query[0] and self.data["results"][-1]["name"][0] >= query[0]:
+            if self.data["results"][0]["name"][0] <= query[0].upper() and self.data["results"][-1]["name"][0] >= query[0].upper():
                 print("Found the right page!")
-                self.right_page = True
+                break
             else:
-                if self.data["results"][0]["name"][0] > query[0]:
+                if self.data["results"][0]["name"][0] > query[0].upper():
                     self.previous_page()
-                elif self.data["results"][-1]["name"][0] < query[0]:
-                    self.next_page()         
+                elif self.data["results"][-1]["name"][0] < query[0].upper():
+                    self.next_page()       
         for result in self.data["results"]:
             if result["name"].lower() == query.lower():
                 return result
-
-
-
-DnD = search()  
-print(DnD.data)
-
-'''
-class general_search(search):
-    def __init__(self, query):
-        super().__init__()
-        self.query = query
-        self.url = self.base_url + "search/?query=" + self.query
-        self.api_request()
-
-
-monsters = category_search("creatures")
-#printer(f"There are {monsters.data['count']} creatures in the Open5e database. Search for a specific creature by name.")
-query = input("Creature name: ")
-monsters.search_page(query)'''

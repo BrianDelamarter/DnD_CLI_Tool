@@ -3,6 +3,8 @@ from API import category_search, search
 
 def main():
     welcome()
+    main_menu()
+    
     
 
 def welcome():
@@ -11,8 +13,7 @@ def welcome():
     Welcome to the DnD CLI Tool! This tool is designed to help you manage you play Dungeons and Dragons. 
     You can use the command line to look up information about characters, monsters, spells, and more. 
     Enjoy your adventure!''')
-    main_menu()
-
+    
 def main_menu():
     printer('''
                     Main Menu:
@@ -20,18 +21,23 @@ def main_menu():
     ''')
     choice = input("Please select an option (1-4): ")
     if choice == '1':
+        avoid = ["services", "rules", "rulesets", "subclasses", "images", "environments", "itemrarities", "alignments", "creaturesets", "creaturetypes", "gamesystems", "publishers", "licenses", "documents", "itemcategories", "itemsets", "weaponproperties"]
         number = 0
         options = search()
+        keys = list(options.data.keys())
+        for key in keys:
+            if key in avoid:
+                options.data.pop(key)
         for key in options.data.keys():
             number += 1
-            printer(f"{number}: {key} at URL: {options.data[key]}.")
-        selction = int(input("Enter the number you would like to query: "))
-        #selected_key = list(options.data.keys())[selction-1]
-        #category = category_search(selected_key)
-        #print(category.url)
-        #printer(f"There are {monsters.data['count']} creatures in the Open5e database. Search for a specific creature by name.")
-        #query = input("Creature name: ")
-        #result = monsters.search_page(query)
+            print(f"{number}: {key} at URL: {options.data[key]}.")
+        selection = int(input("Enter the number you would like to query: "))
+        selected_key = list(options.data.keys())[selection-1]
+        category = category_search(selected_key)
+        printer(f"There are {category.data['count']} {selected_key} in the Open5e database. Search for a specific {selected_key} by name.")
+        query = input("Query name: ")
+        result = category.search_page(query)
+        print(result)
     elif choice == '2':
         pass
     elif choice == '3':

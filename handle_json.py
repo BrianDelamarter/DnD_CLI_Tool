@@ -1,6 +1,6 @@
-from dnd_cli_tool.api_interaction import get_data, get_data_by_url
+'''from dnd_cli_tool.api_interaction import get_data, get_data_by_url
 
-'''
+
 API Response Explained:
 - The API response is a JSON object that contains a dictionary with four keys: 'count', 'next', 'previous', 
 and 'results'.
@@ -9,7 +9,7 @@ and 'results'.
 - 'previous' is a string that contains the URL for the previous page of results, or None if there are no previous results.
 - 'results' is a list of dictionaries, where each dictionary represents a single result for the requested resource
 type. MAX 50 at a time. You can use the 'next' and 'previous' URLs to navigate through the pages of results.
-'''
+
 
 class APIResponse:
     def __init__(self, search_query):
@@ -50,8 +50,4 @@ class APIResponse:
 
     
 
-
-
-magic_items_response = APIResponse("magicitems")
-print(magic_items_response.count_pages())
-print(magic_items_response.expected_page("Gmulet of Health"))
+'''
