@@ -1,4 +1,6 @@
 # Welcome to the DnD CLI Tool
+### Developement is currently paused due to frequent API outages
+### Will hopefully come back to add more functionality in the future
 
 This tool is designed to be a helpful addition to anyone playing DnD remotely. It is not designed
 to run campaign or even fully track characters or other aspects of the game. The primary focus will

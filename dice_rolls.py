@@ -30,7 +30,7 @@ class D20(dice):
         if roll == 20:
             printer(f"You rolled a nat {roll}! That's a critical Success/Hit")
         modified = roll + self.modifier
-        return (f"Your with modifier roll was: {modified}")
+        return (modified)
 
 
 class D100(dice):
@@ -41,4 +41,4 @@ class D100(dice):
 
     def roll(self):
         roll = random.randint(1,self.faces)
-        return (f"Your roll was: {roll}")
+        return (roll)

@@ -46,10 +46,20 @@ def main_menu(choice=None):
         roll = True
         while roll:
             dice_options = {4: dice, 6: dice, 8: dice, 10: dice, 12: dice, 20: D20, 100: D100}
-            faces = int(input("Enter the number of faces on the dice (4, 6, 8, 10, 12, 20, 100): "))
-            modifier = int(input("Enter a modifier to add to the roll (enter 0 for no modifier: "))
-            d = dice_options[faces](faces, modifier)
-            printer(d.roll())
+            number_of_dice = int(input("Enter the number of dice to roll: "))
+            dice_to_roll = []
+            if number_of_dice <= 0:
+                printer("You must roll at least one die.")
+                continue
+            elif number_of_dice == 1:
+                modifier = int(input("Enter a modifier to add to the roll (enter 0 for no modifier: "))
+            for i in range(number_of_dice):
+                faces = int(input("Enter the number of faces on the dice (4, 6, 8, 10, 12, 20, 100): "))   
+                dice_to_roll.append(dice_options[faces](faces, modifier))
+            rolled_sum = 0
+            for d in dice_to_roll:
+                rolled_sum += d.roll()
+            printer(f"The sum of your rolls is: {rolled_sum}")
             roll_again = input("Would you like to roll again? (y/n): ")
             if roll_again.lower() != 'y':
                 roll = False
